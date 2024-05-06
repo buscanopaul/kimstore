@@ -4,7 +4,8 @@ import InputField from "@/components/InputField";
 import Paragraph from "@/components/Paragraph";
 import Spacer from "@/components/Spacer";
 import TextLink from "@/components/TextLink";
-import React, { useCallback, useState } from "react";
+import { useNavigation } from "expo-router";
+import React, { useCallback, useEffect, useState } from "react";
 import { Image, SafeAreaView, View } from "react-native";
 
 type Props = {};
@@ -13,10 +14,17 @@ const login = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+  const navigation = useNavigation();
 
   const handleHidePassword = useCallback(() => {
     setHidePassword(!hidePassword);
   }, [hidePassword]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  });
 
   return (
     <View className="flex-1 px-6 bg-white">
