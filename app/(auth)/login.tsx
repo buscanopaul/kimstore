@@ -20,6 +20,10 @@ const login = (props: Props) => {
     setHidePassword(!hidePassword);
   }, [hidePassword]);
 
+  const handleLogin = useCallback(() => {
+    navigation.navigate("(tabs)");
+  }, []);
+
   useEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -65,7 +69,7 @@ const login = (props: Props) => {
           bgClassName="bg-red-600"
           textClassName="text-white"
           fontFamily="font-primary"
-          onPress={() => {}}
+          onPress={handleLogin}
         />
         <Spacer height="h-3" />
         <ButtonTemplate

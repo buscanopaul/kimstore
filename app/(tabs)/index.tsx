@@ -1,10 +1,10 @@
-import { Dimensions, StyleSheet } from "react-native";
-
-import EditScreenInfo from "@/components/EditScreenInfo";
-import { Text, View } from "@/components/Themed";
+import Spacer from "@/components/Spacer";
+import { Text } from "@/components/Themed";
+import HomeHeader from "@/components/pages/HomeHeader";
+import HomeSearch from "@/components/pages/HomeSearch";
 import useFetchProducts from "@/hooks/useFetchProducts";
-import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
+import { SafeAreaView, View } from "react-native";
 
 export default function TabOneScreen() {
   const { data, isLoading, error } = useQuery({
@@ -16,38 +16,12 @@ export default function TabOneScreen() {
   if (error) return <Text>Error loading products</Text>;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={{ height: 200, width: Dimensions.get("screen").width }}>
-        <FlashList
-          data={data}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
-          estimatedItemSize={20}
-        />
+    <SafeAreaView className="flex-1 bg-white">
+      <View className="px-6">
+        <HomeHeader />
+        <Spacer height="h-7" />
+        <HomeSearch />
       </View>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-});
